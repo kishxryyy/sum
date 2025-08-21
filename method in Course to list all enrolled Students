@@ -1,0 +1,57 @@
+import java.util.ArrayList;
+import java.util.List;
+
+class Student {
+    private final String name;
+
+    public Student(String name) {
+        this.name = name;
+    }
+    public String getName() {
+        return name;
+    }
+    @Override
+    public String toString() {
+        return name;
+    }
+}
+
+class Course {
+    private final String courseName;
+    private final List<Student> students = new ArrayList<>();
+
+    public Course(String courseName) {
+        this.courseName = courseName;
+    }
+
+    // Method to add (enroll) a student
+    public void enrollStudent(Student s) {
+        if (s != null) {
+            students.add(s);
+        }
+    }
+
+    // Method to list all enrolled students
+    public void listEnrolledStudents() {
+        System.out.println("Enrolled students in \"" + courseName + "\":");
+        if (students.isEmpty()) {
+            System.out.println("(none)");
+            return;
+        }
+        for (Student s : students) {
+            System.out.println("- " + s.getName());
+            // Or simply: System.out.println("- " + s);  // uses toString()
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Course c1 = new Course("Java Programming");
+        c1.enrollStudent(new Student("Alice"));
+        c1.enrollStudent(new Student("Bob"));
+        c1.enrollStudent(new Student("Charlie"));
+
+        c1.listEnrolledStudents();
+    }
+}
